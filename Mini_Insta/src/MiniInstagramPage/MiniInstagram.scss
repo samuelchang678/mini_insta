@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --cream: #ede8dc;
+    --accent: #c8502a;
+    --accent-light: #e8c5b8;
+    --muted: #7a7060;
+    --border: rgba(13, 13, 13, 0.12);
+    --shadow: 0 2px 20px rgba(13, 13, 13, 0.08);
+    --shadow-lg: 0 8px 40px rgba(13, 13, 13, 0.14);
+    --radius: 2px;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+}
+
+html,
+body,
+#root {
+    min-height: 100%;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Topbar ── */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topbar-logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-style: italic;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+}
+
+.topbar-logo-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    padding-right: 8px;
+}
+
+.topbar-logo span {
+    color: var(--accent);
+}
+
+.topbar-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ── Buttons ── */
+.btn {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1.5px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    padding: 7px 18px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.btn-primary:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.btn-ghost {
+    border-color: transparent;
+    padding: 7px 12px;
+}
+
+.btn-ghost:hover {
+    background: var(--cream);
+    color: var(--ink);
+}
+
+/* ── Feed ── */
+.feed-container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    width: 100%;
+}
+
+.feed-header {
+    margin-bottom: 32px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.feed-header h1 {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.feed-count {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+}
+
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+/* ── Post Card ── */
+.post-card {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--cream);
+}
+
+.post-card img {
+    width: 100%;
+    height: 100%;
+    max-width: 480px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.post-card:hover img {
+    transform: scale(1.04);
+}
+
+.post-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(13, 13, 13, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px;
+    transition: background 0.25s;
+}
+
+.post-card:hover .post-card-overlay {
+    background: rgba(13, 13, 13, 0.45);
+}
+
+.post-card-caption,
+.post-card-likes,
+.post-card-author {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    opacity: 0;
+    transition: opacity 0.25s, transform 0.25s;
+    overflow: hidden;
+}
+
+.post-card-caption,
+.post-card-likes {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    transform: translateY(6px);
+}
+
+.post-card-author {
+    transform: translateY(-6px);
+}
+
+.post-card:hover .post-card-caption,
+.post-card:hover .post-card-likes,
+.post-card:hover .post-card-author {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.post-card-top {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.post-card-bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.post-card-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream);
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* ── Shared Backdrop ── */
+.panel-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(13, 13, 13, 0.55);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ── Shared Buttons ── */
+.close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 20px;
+    padding: 2px 6px;
+    border-radius: var(--radius);
+    line-height: 1;
+    transition: color 0.15s;
+}
+
+.close-btn:hover {
+    color: var(--ink);
+}
+
+/* ── Shared Error ── */
+.error-banner {
+    background: #fdecea;
+    border: 1px solid #f5c6cb;
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #a02020;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+/* ── Loading / Skeleton ── */
+.skeleton {
+    background: linear-gradient(90deg, var(--cream) 25%, #e8e4d8 50%, var(--cream) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+    border-radius: var(--radius);
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2px;
+}
+
+.skeleton-card {
+    aspect-ratio: 1;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border);
+    border-top-color: var(--ink);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Pull to Refresh ── */
+.pull-indicator {
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 16px;
+    z-index: 50;
+    pointer-events: none;
+    transition: opacity 0.1s;
+}
+
+.pull-icon {
+    display: inline-block;
+    transition: transform 0.2s;
+    font-size: 16px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .feed-container {
+        padding: 24px 12px;
+    }
+
+    .post-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2px;
+    }
+}
