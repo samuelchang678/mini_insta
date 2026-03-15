@@ -10,7 +10,7 @@ A minimal Instagram-like web app built as a frontend interview assignment. Brows
 - **Infinite Scroll** — Automatically loads more posts as you scroll down using cursor-based pagination
 - **Pull to Refresh** — Swipe down on mobile to reload the feed
 - **Post Detail** — Click any post to view the full image, caption, likes, and comments in a side panel
-- **Upload Flow** — Create a new post with drag-and-drop image upload, caption, and username fields
+- **Upload Flow** — Create a new post with drag-and-drop image upload, caption, and author fields
 - **1 MB Limit Enforcement** — Image size is validated client-side before upload with a clear error message
 - **Skeleton Loading** — Shimmer placeholders while the feed is loading
 - **Keyboard Accessible** — Modals close on Escape key
