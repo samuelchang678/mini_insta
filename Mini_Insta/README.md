@@ -43,18 +43,21 @@ The app will be running at `http://localhost:5173`.
 ## Project Structure
 
 ```
-my-app/
+Mini_Insta/
 ├── public/
 │   ├── gram.png              # App icon
 │   └── mingram.svg           # Favicon
 ├── src/
+|   ├── Components/
+│   │   ├── PostDetail
+|   │   │   ├── PostDetail.jsx          # Post detail panel and comments
+|   │   │   ├── PostDetail.scss
+│   │   ├── UploadModal
+|   │   │   ├── UploadModal.jsx         # New post upload modal
+|   │   │   └── UploadModal.scss
 │   ├── miniInstagramPage/
 │   │   ├── MiniInstagram.jsx       # Main feed and app shell
 │   │   ├── MiniInstagram.scss      # Global and shared styles
-│   │   ├── PostDetail.jsx          # Post detail panel and comments
-│   │   ├── PostDetail.scss
-│   │   ├── UploadModal.jsx         # New post upload modal
-│   │   └── UploadModal.scss
 │   ├── Util/
 │   │   └── miniInstagram-api.js    # API helper functions
 │   ├── App.tsx
